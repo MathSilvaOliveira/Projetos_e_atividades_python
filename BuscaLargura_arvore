@@ -1,0 +1,83 @@
+#Busca por largura
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.children = []
+
+    def add_child(self, child):
+        self.children.append(child)
+
+def user_breadth_first_search(node, target):
+    queue = [node]
+    visited_nodes = set()
+
+    while queue:
+        node = queue.pop(0)
+        visited_nodes.add(node.data)
+
+        if node.data == target:
+            visited_count = len(visited_nodes)
+            percent_visited = (visited_count / total_nodes) * 100
+            return [node.data], percent_visited, visited_count, visited_nodes
+
+        for child in node.children:
+            if child.data not in visited_nodes:
+                queue.append(child)
+
+    return None, 0, len(visited_nodes), visited_nodes
+
+# Example usage:
+# Create a tree structure
+root = Node("A")
+node_b = Node("B")
+node_c = Node("C")
+node_d = Node("D")
+node_e = Node("E")
+node_f = Node("F")
+node_g = Node("G")
+node_h = Node("H")
+node_i = Node("I")
+node_j = Node("J")
+node_k = Node("K")
+node_l = Node("L")
+node_m = Node("M")
+
+root.add_child(node_b)
+root.add_child(node_c)
+root.add_child(node_h)
+
+node_b.add_child(node_d)
+node_b.add_child(node_e)
+node_b.add_child(node_g)
+
+node_c.add_child(node_f)
+node_c.add_child(node_i)
+node_c.add_child(node_j)
+
+node_h.add_child(node_k)
+node_h.add_child(node_l)
+node_h.add_child(node_m)
+
+# Calculate the total number of nodes
+total_nodes = 0
+def count_nodes(node):
+    global total_nodes
+    total_nodes += 1
+    for child in node.children:
+        count_nodes(child)
+
+count_nodes(root)
+
+# Perform user breadth-first search on the tree
+target = "H"
+result_path, percent_visited, visited_count, visited_nodes = user_breadth_first_search(root, target)
+
+if result_path:
+    print(f"Found {target} in the tree.")
+    #print("Caminho percorrido:", " -> ".join(result_path))
+    print(f"Percentual de nós visitados: {percent_visited:.2f}%")
+    print(f"Número total de nós visitados: {visited_count}")
+    print("Todos os nós visitados:", ", ".join(visited_nodes))
+else:
+    print(f"{target} not found in the tree.")
