@@ -1,0 +1,51 @@
+# Função para realizar a adição
+def add(x, y):
+    return x + y
+
+# Função para realizar a subtração
+def subtract(x, y):
+    return x - y
+
+# Função para realizar a multiplicação
+def multiply(x, y):
+    return x * y
+
+# Função para realizar a divisão
+def divide(x, y):
+    if y == 0:
+        return "Não é possível dividir por zero"
+    return x / y
+
+# Menu principal da calculadora
+while True:
+    print("Selecione a operação:")
+    print("1. Adição")
+    print("2. Subtração")
+    print("3. Multiplicação")
+    print("4. Divisão")
+    print("5. Sair")
+
+    # Solicita ao usuário que selecione uma operação
+    choice = input("Digite a opção (1/2/3/4/5): ")
+
+    if choice == '5':
+        print("Calculadora encerrada.")
+        break
+
+    if choice not in ['1', '2', '3', '4']:
+        print("Opção inválida. Tente novamente.")
+        continue
+
+    # Solicita os números de entrada
+    num1 = float(input("Digite o primeiro número: "))
+    num2 = float(input("Digite o segundo número: "))
+
+    # Realiza a operação selecionada
+    if choice == '1':
+        print("Resultado: ", add(num1, num2))
+    elif choice == '2':
+        print("Resultado: ", subtract(num1, num2))
+    elif choice == '3':
+        print("Resultado: ", multiply(num1, num2))
+    elif choice == '4':
+        print("Resultado: ", divide(num1, num2))
