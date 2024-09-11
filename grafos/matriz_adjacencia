@@ -1,0 +1,47 @@
+class Grafo:
+
+    def __init__(self, vertices): 
+        self.vertices = vertices
+        self.grafo = [[0]*self.vertices for i in range(self.vertices)]
+
+    def inserir_aresta(self, a, b):
+        self.grafo[a-1][b-1] = 1   # trocar = por += se for grafo multiplo
+        self.grafo[b-1][a-1] = 1
+
+    def verificar_aresta(self, v1, v2):
+        if(self.grafo[v1-1][v2-1] == 1):
+            print(f'Possui aresta entre {v1} e {v2}')
+        else:
+            print(f'Não possui aresta entre {v1} e {v2}')    
+        
+
+    def mostrar_matriz(self):
+        header = '  ' + '  '.join(str(i+1) for i in range(self.vertices))
+        print('A matriz de adjacência é\n', header)
+        n = 0
+        for i in range(self.vertices):
+            n += 1
+            print(n, self.grafo[i])
+
+    def calcular_grau(self, vertice):
+        grau = sum(self.grafo[vertice-1])
+        return print(f"Grau do vertice {vertice}:", grau )    
+    
+    def vertices_adjacentes(self, vertice):
+        adjacentes = [i+1 for i, aresta in enumerate(self.grafo[vertice-1]) if aresta == 1]
+        return print(f"Vertices adjacentes ao vertice {vertice}:", adjacentes )  
+
+
+g = Grafo(4)
+
+g.inserir_aresta(1,2)
+g.inserir_aresta(2,3)
+g.inserir_aresta(4,2)
+
+g.mostrar_matriz()
+
+g.verificar_aresta(4,1)
+
+g.calcular_grau(2)
+
+g.vertices_adjacentes(2)
