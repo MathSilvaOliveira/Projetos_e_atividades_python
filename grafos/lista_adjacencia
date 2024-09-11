@@ -1,0 +1,44 @@
+class Grafo:
+
+    def __init__(self, vertices):
+        self.vertices = vertices
+        self.grafo = [[]*self.vertices for _ in range(self.vertices)]
+
+    def inserir_aresta(self, a, b):
+        self.grafo[a-1].append(b) 
+        self.grafo[b-1].append(a) 
+
+    def mostra_lista(self):
+        for i in range(self.vertices):
+            print(f'{i+1}:', end=' ')
+            for j in self.grafo[i]:
+                print(f'{j} ->', end=' ')
+            print('')
+
+    def calcula_grau(self, vertice):
+        grau = len(self.grafo[vertice-1])
+        print(f"O grau do vertice {vertice} é:", grau)
+
+    def verifica_vertice(self, a, b):
+        if a in self.grafo[b-1]:
+            print(f'Possuem aresta entre os vertices {a} e {b}')
+        else:
+            print(f'Não possuem aresta entre os vertices {a} e {b}')   
+
+    def vertices_adjacentes(self, v):
+        print(f'Vertices adjacentes de {v}: ', self.grafo[v-1])             
+    
+g = Grafo(4)
+
+g.inserir_aresta(1,2)
+g.inserir_aresta(1,3)
+g.inserir_aresta(2,3)
+g.inserir_aresta(2,4)
+
+g.mostra_lista()
+
+g.calcula_grau(3)
+
+g.verifica_vertice(4,1)
+
+g.vertices_adjacentes(3)
